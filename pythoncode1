@@ -53,16 +53,20 @@ def Data():
     plt.savefig("UK.jpg")
     plt.show()
 
-    # Line Plot for US
-    india_data = df_by_year.loc['United States']
-    india_data.plot()
+    # Bar Chart for US
+    us_data = df_by_year.loc['United States']
+
+    # If 'Year' is part of the MultiIndex
+    us_data = us_data.reset_index(level='Year')
+
+    plt.figure(figsize=(8, 6))
+    plt.bar(us_data['Year'], us_data['Value'], color='red')  # You can choose any color
     plt.title("Climate Change Trends in US")
     plt.xlabel("Year")
-    plt.xticks(rotation = 90)
     plt.ylabel("Value")
-    plt.savefig("US.jpg")
+    plt.xticks(rotation=90)
+    plt.savefig("US_bar_chart.jpg")
     plt.show()
-
     return df_by_year, df_by_country
 # Example usage of the function to read and transform the dataset
 df_by_year, df_by_country = Data()
